@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Result</title>
+</head>
+
+<body style="text-align:center;font-family:Arial;background:#0f172a;color:white;padding:50px;">
+
+<h1>Exam Finished</h1>
+
+<h2>Your Score:</h2>
+
+<h1 id="score"></h1>
+
+<a href="coding.html" style="display:inline-block;margin-top:20px;padding:10px 20px;background:#2563eb;color:white;text-decoration:none;border-radius:6px;">
+Retry Exam
+</a>
+
+<script>
+let score = localStorage.getItem("score");
+document.getElementById("score").innerText = score ? score : "0";
+</script>
+
+</body>
+</html>

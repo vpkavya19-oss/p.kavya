@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Coding Test</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #0f172a;
+    color: white;
+}
+
+header {
+    background: #111827;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+textarea {
+    width: 50%;
+    height: 300px;
+    background: #1e293b;
+    color: white;
+    border: 1px solid #334155;
+}
+
+.output {
+    width: 50%;
+    background: black;
+    color: lime;
+    padding: 10px;
+    height: 300px;
+    overflow: auto;
+}
+
+button {
+    padding: 10px 15px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.question {
+    background: #1e293b;
+    margin: 20px;
+    padding: 15px;
+    border-radius: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Coding Test</h1>
+</header>
+
+<div class="question" id="qbox"></div>
+
+<div style="text-align:center;">
+    <button onclick="runCode()">Run Code</button>
+    <button onclick="nextQuestion()">Next</button>
+    <p id="score"></p>
+</div>
+
+<div class="container">
+<textarea id="code"></textarea>
+<div class="output" id="output"></div>
+</div>
+
+<script>
+
+let questions = [
+    "Add two numbers",
+    "Even or Odd",
+    "Reverse a number"
+];
+
+let qid = Number(localStorage.getItem("qid")) || 0;
+let score = Number(localStorage.getItem("score")) || 0;
+
+if (qid >= questions.length) {
+    window.location.href = "result.html";
+}
+
+document.getElementById("qbox").innerHTML =
+"<h3>" + questions[qid] + "</h3>";
+
+let time = 60;
+
+let timer = setInterval(() => {
+    document.getElementById("score").innerText =
+        "Score: " + score + " | Time: " + time;
+
+    time--;
+
+    if (time < 0) {
+        nextQuestion();
+    }
+}, 1000);
+
+function runCode() {
+    let code = document.getElementById("code").value;
+    let output = document.getElementById("output");
+
+    output.innerHTML = "";
+
+    let oldLog = console.log;
+    console.log = function(msg) {
+        output.innerHTML += msg + "<br>";
+    }
+
+    try {
+        eval(code);
+        score++;
+        localStorage.setItem("score", score);
+    } catch (err) {
+        output.innerHTML = err;
+    }
+
+    console.log = oldLog;
+}
+
+function nextQuestion() {
+    qid++;
+    localStorage.setItem("qid", qid);
+
+    if (qid >= questions.length) {
+        window.location.href = "result.html";
+    } else {
+        window.location.href = "question.html";
+    }
+}
+
+</script>
+
+</body>
+</html>
