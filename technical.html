@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Technical Quiz</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f4f4;
+}
+
+.container{
+    background:white;
+    width:800px;
+    margin:20px auto;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px gray;
+}
+
+button{
+    background:#0077cc;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:5px;
+    cursor:pointer;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>Technical Quiz</h1>
+<h3 id="timer">Time Left: 10:00</h3>
+<p><b>1. C language was developed by?</b></p>
+<input type="radio" name="q1" value="Dennis Ritchie">Dennis Ritchie<br>
+<input type="radio" name="q1" value="James Gosling">James Gosling<br>
+<input type="radio" name="q1" value="Guido">Guido van Rossum<br><br>
+
+<p><b>2. Java is a ______ language.</b></p>
+<input type="radio" name="q2" value="Programming">Programming<br>
+<input type="radio" name="q2" value="Database">Database<br>
+<input type="radio" name="q2" value="OS">Operating System<br><br>
+
+<p><b>3. Python was created by?</b></p>
+<input type="radio" name="q3" value="Guido">Guido van Rossum<br>
+<input type="radio" name="q3" value="Dennis">Dennis Ritchie<br>
+<input type="radio" name="q3" value="Bjarne">Bjarne Stroustrup<br><br>
+
+<p><b>4. HTML stands for?</b></p>
+<input type="radio" name="q4" value="Hyper Text Markup Language">Hyper Text Markup Language<br>
+<input type="radio" name="q4" value="High Text Machine Language">High Text Machine Language<br>
+<input type="radio" name="q4" value="Hyper Tool Markup Language">Hyper Tool Markup Language<br><br>
+
+<p><b>5. CSS is used for?</b></p>
+<input type="radio" name="q5" value="Styling">Styling<br>
+<input type="radio" name="q5" value="Database">Database<br>
+<input type="radio" name="q5" value="Networking">Networking<br><br>
+
+<p><b>6. SQL is used to?</b></p>
+<input type="radio" name="q6" value="Manage Database">Manage Database<br>
+<input type="radio" name="q6" value="Design UI">Design UI<br>
+<input type="radio" name="q6" value="Compile Code">Compile Code<br><br>
+
+<p><b>7. Which symbol is used to end a statement in C?</b></p>
+<input type="radio" name="q7" value=";">;<br>
+<input type="radio" name="q7" value=":">:<br>
+<input type="radio" name="q7" value=",">,<br><br>
+
+<p><b>8. Which company developed Java?</b></p>
+<input type="radio" name="q8" value="Sun Microsystems">Sun Microsystems<br>
+<input type="radio" name="q8" value="Microsoft">Microsoft<br>
+<input type="radio" name="q8" value="Google">Google<br><br>
+
+<p><b>9. Full form of DBMS?</b></p>
+<input type="radio" name="q9" value="Database Management System">Database Management System<br>
+<input type="radio" name="q9" value="Data Basic Management System">Data Basic Management System<br>
+<input type="radio" name="q9" value="Database Machine System">Database Machine System<br><br>
+
+<p><b>10. JavaScript is mainly used for?</b></p>
+<input type="radio" name="q10" value="Web Development">Web Development<br>
+<input type="radio" name="q10" value="Hardware Design">Hardware Design<br>
+<input type="radio" name="q10" value="Networking">Networking<br><br>
+<a href="kavya.html">
+    <button>Back to Home</button>
+</a>
+<button onclick="checkAnswer()">Submit</button>
+
+<h2 id="result"></h2>
+
+</div>
+
+<script>
+     let timeLeft = 600;
+
+let timer = setInterval(function() {
+
+    let minutes = Math.floor(timeLeft / 60);
+    let seconds = timeLeft % 60;
+
+    document.getElementById("timer").innerHTML =
+    "Time Left: " + minutes + ":" +
+    (seconds < 10 ? "0" : "") + seconds;
+
+    timeLeft--;
+
+    if(timeLeft < 0){
+        clearInterval(timer);
+        alert("Time Over!");
+        checkAnswer();
+    }
+
+}, 1000);
+
+function checkAnswer(){
+
+let score = 0;
+
+if(document.querySelector('input[name="q1"]:checked')?.value=="Dennis Ritchie") score++;
+if(document.querySelector('input[name="q2"]:checked')?.value=="Programming") score++;
+if(document.querySelector('input[name="q3"]:checked')?.value=="Guido") score++;
+if(document.querySelector('input[name="q4"]:checked')?.value=="Hyper Text Markup Language") score++;
+if(document.querySelector('input[name="q5"]:checked')?.value=="Styling") score++;
+if(document.querySelector('input[name="q6"]:checked')?.value=="Manage Database") score++;
+if(document.querySelector('input[name="q7"]:checked')?.value==";") score++;
+if(document.querySelector('input[name="q8"]:checked')?.value=="Sun Microsystems") score++;
+if(document.querySelector('input[name="q9"]:checked')?.value=="Database Management System") score++;
+if(document.querySelector('input[name="q10"]:checked')?.value=="Web Development") score++;
+
+document.getElementById("result").innerHTML =
+"Your Score: " + score + "/10";
+
+}
+
+</script>
+
+</body>
+</html>
